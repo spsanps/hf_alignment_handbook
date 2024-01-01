@@ -1,0 +1,44 @@
+# Model arguments
+model_name_or_path: mistralai/Mistral-7B-v0.1
+model_revision: main
+torch_dtype: bfloat16
+use_flash_attention_2: true
+
+# Data training arguments
+dataset_mixer:
+  tal_dataset_local: 1.0
+dataset_splits:
+- train
+- test
+preprocessing_num_workers: 12
+truncation_side: left
+chat_template: "{{ messages }}"
+
+# SFT trainer config
+bf16: true
+do_eval: true
+evaluation_strategy: epoch
+gradient_accumulation_steps: 2
+gradient_checkpointing: true
+hub_model_id: mist-7b-sft-TAL
+hub_strategy: every_save
+learning_rate: 2.0e-05
+log_level: info
+logging_steps: 5  
+logging_strategy: steps
+lr_scheduler_type: cosine
+max_seq_length: 2048
+max_steps: 100
+num_train_epochs: 2
+output_dir: data/mist-7b-sft-TAL
+overwrite_output_dir: true
+per_device_eval_batch_size: 16
+per_device_train_batch_size: 32
+push_to_hub: true
+remove_unused_columns: true
+report_to:
+- wandb
+save_strategy: "no"
+save_total_limit: null
+seed: 42
+tf32: true

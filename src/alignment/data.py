@@ -33,13 +33,20 @@ def apply_chat_template(
         return re.sub(f"^{re.escape(pattern)}", "", s)
 
     if task in ["sft", "generation"]:
+        #### PATCH for simple test
         messages = example["messages"]
+        example["text"] = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True if task == "generation" else False
+        )
+        ####
+
+        """messages = example["messages"]
         # We add an empty system message if there is none
         if messages[0]["role"] != "system":
             messages.insert(0, {"role": "system", "content": ""})
         example["text"] = tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True if task == "generation" else False
-        )
+        )"""
     elif task == "rm":
         if all(k in example.keys() for k in ("chosen", "rejected")):
             chosen_messages = example["chosen"]
@@ -143,6 +150,15 @@ def mix_datasets(dataset_mixer: dict, splits: Optional[List[str]] = None, shuffl
     raw_train_datasets = []
     raw_val_datasets = []
     fracs = []
+
+    ##### PATCH for simple test
+    ds, frac = list(dataset_mixer.items())[0]
+    dataset_hf =  load_dataset(ds)
+    raw_datasets["train"] = dataset_hf["sample_train"]
+    raw_datasets["test"] = dataset_hf["small_val"]
+    return raw_datasets
+    #####
+
     for ds, frac in dataset_mixer.items():
         fracs.append(frac)
         for split in splits:
