@@ -16,11 +16,12 @@ preprocessing_num_workers: 12
 bf16: true
 do_eval: false
 evaluation_strategy: epoch
-gradient_accumulation_steps: 2
+gradient_accumulation_steps: 1
 gradient_checkpointing: true
 hub_model_id: mist-7b-sft-gutenberg-50k
 hub_strategy: end
-learning_rate: 2.0e-05
+learning_rate: 1.0e-05
+max_grad_norm: 0.5
 log_level: info
 logging_steps: 5  
 logging_strategy: steps
