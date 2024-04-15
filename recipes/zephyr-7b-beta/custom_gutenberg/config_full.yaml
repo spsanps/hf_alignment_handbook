@@ -15,7 +15,7 @@ preprocessing_num_workers: 12
 # SFT trainer config
 bf16: true
 do_eval: false
-evaluation_strategy: no
+evaluation_strategy: "no"
 gradient_accumulation_steps: 1
 gradient_checkpointing: true
 hub_model_id: mist-7b-sft-gutenberg-50k-29k-comments
