@@ -4,7 +4,7 @@ This is for running a series of sft experiments.
 
 Steps I take to run experiments:
 
-'''
+```
 git clone https://github.com/spsanps/hf_alignment_handbook.git
-'''
+```
 
