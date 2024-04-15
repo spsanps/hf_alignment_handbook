@@ -39,10 +39,7 @@ def apply_chat_template(
 
     if task in ["sft", "generation"]:
         #### PATCH for simple test
-        messages = example["messages"]
-        example["text"] = tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True if task == "generation" else False
-        )
+        example["text"] = example["combined_text"]
         ####
 
         """messages = example["messages"]
