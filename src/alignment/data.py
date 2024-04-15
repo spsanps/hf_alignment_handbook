@@ -156,8 +156,8 @@ def mix_datasets(dataset_mixer: dict, splits: Optional[List[str]] = None, shuffl
     ##### PATCH for simple test
     ds, frac = list(dataset_mixer.items())[0]
     dataset_hf =  load_dataset(ds)
-    raw_datasets["train"] = dataset_hf["train1"]
-    raw_datasets["test"] = dataset_hf["small_val"]
+    raw_datasets["train"] = dataset_hf["train"]
+    raw_datasets["test"] = dataset_hf["train"]
     return raw_datasets
     #####
 
