@@ -29,6 +29,13 @@ DEFAULT_CHAT_TEMPLATE = """{% for message in messages %}
 {{ '<|assistant|>\n' + message['book_text'] + eos_token }}
 {% endfor %}"""
 
+DEFAULT_CHAT_TEMPLATE = """{% for message in messages %}
+{{ '// ' + message['summary_text']}}
+{{ '\n\n' + message['book_text']}}
+{% endfor %}"""
+
+
+
 
 def apply_chat_template(
     example, tokenizer, task: Literal["sft", "generation", "rm", "dpo"] = "sft", assistant_prefix="<|assistant|>\n"
@@ -39,7 +46,11 @@ def apply_chat_template(
 
     if task in ["sft", "generation"]:
         #### PATCH for simple test
-        example["text"] = example["combined_text"]
+        #example["text"] = example["combined_text"]
+        messages = example["messages"]
+        example["text"] = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True if task == "generation" else False
+        )
         ####
 
         """messages = example["messages"]
@@ -156,7 +167,7 @@ def mix_datasets(dataset_mixer: dict, splits: Optional[List[str]] = None, shuffl
     ##### PATCH for simple test
     ds, frac = list(dataset_mixer.items())[0]
     dataset_hf =  load_dataset(ds)
-    raw_datasets["train"] = dataset_hf["train"]
+    raw_datasets["train"] = dataset_hf["train1"]
     raw_datasets["test"] = dataset_hf["train"]
     return raw_datasets
     #####

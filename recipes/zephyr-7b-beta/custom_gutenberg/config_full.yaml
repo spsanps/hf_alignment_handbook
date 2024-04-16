@@ -1,5 +1,5 @@
 # Model arguments
-model_name_or_path: sanps/mist-7b-sft-gutenberg-50k
+model_name_or_path: mistralai/Mistral-7B-v0.1
 model_revision: main
 torch_dtype: bfloat16
 use_flash_attention_2: true
@@ -18,9 +18,9 @@ do_eval: false
 evaluation_strategy: "no"
 gradient_accumulation_steps: 1
 gradient_checkpointing: true
-hub_model_id: mist-7b-sft-gutenberg-50k-29k-comments
+hub_model_id: mist-7b-sft-gutenberg-50k-noEOS
 hub_strategy: end
-learning_rate: 2.0e-05
+learning_rate: 1.0e-05
 max_grad_norm: 0.5
 log_level: info
 logging_steps: 5  
@@ -28,11 +28,11 @@ logging_strategy: steps
 lr_scheduler_type: cosine
 max_seq_length: 4096
 max_steps: -1
-num_train_epochs: 1
-output_dir: data/mist-7b-sft-gutenberg-50k-29k-comments
+num_train_epochs: 2
+output_dir: data/mist-7b-sft-gutenberg-50k-noEOS
 overwrite_output_dir: true
 #per_device_eval_batch_size: 2
-per_device_train_batch_size: 4
+per_device_train_batch_size: 2
 push_to_hub: true
 remove_unused_columns: true
 report_to:
