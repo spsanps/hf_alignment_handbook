@@ -6,7 +6,7 @@ Steps I take to run experiments:
 
 ```
 git clone https://github.com/spsanps/hf_alignment_handbook.git
-cd ./hf_alignment-handbook/
+cd hf_alignment-handbook
 python -m pip install .
 ```
 
