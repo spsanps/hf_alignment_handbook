@@ -16,7 +16,7 @@ python -m pip install flash-attn==2.3.6 --no-build-isolation
 
 ```
 apt update
-apt instal git-lfs
+apt install git-lfs
 ```
 
 ```
